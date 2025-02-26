@@ -90,6 +90,4 @@ VALUES
 (4, 4); 
 
 
-SELECT sales.name, sales.date_start, sales.date_end, sales.country, categories.name AS CategoryName
-FROM categories 
-INNER JOIN sales ON categories.Id = sales.category_id;
+
