@@ -26,6 +26,7 @@ namespace Dapper_ORM
                 while (true)
                 {
                     Console.Clear();
+
                     Console.WriteLine("1. Показать все покупателей");
                     Console.WriteLine("2. Показать email всех покупателей");
                     Console.WriteLine("3. Показать список разделов");
@@ -139,15 +140,16 @@ namespace Dapper_ORM
             using (IDbConnection db = new SqlConnection(connectionString))
             {
                 var sales = db.Query<SaleViewModel>(
-                "SELECT sales.name, sales.date_start, sales.date_end, sales.country, categories.name AS CategoryName " +
+                "SELECT sales.name, sales.date_start AS DateStart, sales.date_end AS DateEnd, sales.country, categories.name AS CategoryName " +
                 "FROM categories INNER JOIN sales ON categories.Id = sales.category_id");
+
 
                 int iter = 0;
                 foreach (var st in sales)
                 {
                     Console.Write($"Акция #{++iter}{st.Name,15}");
-                    Console.Write($"{st.DateStart,15}");
-                    Console.Write($"{st.DateEnd,10}");
+                    Console.Write($"{st.DateStart:yyyy-MM-dd}"); 
+                    Console.Write($"{st.DateEnd:yyyy-MM-dd}");
                     Console.Write($"{st.Country,10}");
                     Console.Write($"{st.CategoryName,10}");
                 }
