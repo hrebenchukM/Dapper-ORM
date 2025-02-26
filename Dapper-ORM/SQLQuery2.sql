@@ -4,12 +4,6 @@ GO
 USE SalesDB; 
 GO
 
-CREATE TABLE customers_categories (
-    customer_id INT ,
-    category_id INT ,
-    FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
-);
 
 
 CREATE TABLE customers (
@@ -26,6 +20,15 @@ CREATE TABLE categories (
     id INT IDENTITY PRIMARY KEY,
     name NVARCHAR(255) NOT NULL 
 );
+
+CREATE TABLE customers_categories (
+    id INT IDENTITY PRIMARY KEY,
+    customer_id INT ,
+    category_id INT ,
+    FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+);
+
 
 CREATE TABLE sales  (
     id INT IDENTITY PRIMARY KEY,
