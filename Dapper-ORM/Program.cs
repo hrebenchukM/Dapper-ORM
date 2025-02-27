@@ -261,7 +261,7 @@ namespace Dapper_ORM
                 string country = Console.ReadLine()!;
 
                 var sales = db.Query<SaleViewModel>(
-                    "SELECT sales.name, sales.date_start, sales.date_end, sales.country, categories.name AS CategoryName " +
+                    "SELECT sales.name, sales.date_start AS DateStart, sales.date_end AS DateEnd, sales.country, categories.name AS CategoryName " +
                     "FROM categories INNER JOIN sales ON categories.Id = sales.category_id WHERE sales.country = @Country",
                     new { Country = country });
 
