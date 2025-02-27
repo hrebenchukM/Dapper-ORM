@@ -268,11 +268,11 @@ namespace Dapper_ORM
                 int iter = 0;
                 foreach (var st in sales)
                 {
-                    Console.Write($"Акция #{++iter}{st.Name,15}");
-                    Console.Write($"{st.DateStart,15}");
-                    Console.Write($"{st.DateEnd,10}");
-                    Console.Write($"{st.Country,10}");
-                    Console.Write($"{st.CategoryName,10}");
+                    Console.Write($"Акция #{++iter,-3} {st.Name,-20} ");
+                    Console.Write($"{st.DateStart:yyyy-MM-dd,} ");
+                    Console.Write($"{st.DateEnd:yyyy-MM-dd,} ");
+                    Console.Write($"{st.Country,-15} ");
+                    Console.WriteLine($"{st.CategoryName,-15}");
                 }
             }
             Console.ReadKey();
