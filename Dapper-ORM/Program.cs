@@ -36,6 +36,10 @@ namespace Dapper_ORM
                     Console.WriteLine("7. Показать всех покупателей из конкретного города");
                     Console.WriteLine("8. Показать всех покупателей из конкретной страны");
                     Console.WriteLine("9. Показать все акции для конкретной страны");
+                    Console.WriteLine("10. Показать список городов конкретной страны");
+
+                    Console.WriteLine("11. Показать  список разделов конкретного покупателя");
+                    Console.WriteLine("12. Показать  список акционных товаров конкретного раздела.");
                     Console.WriteLine("0. Выход");
                     int result = int.Parse(Console.ReadLine()!);
                     switch (result)
@@ -66,6 +70,15 @@ namespace Dapper_ORM
                             break;
                         case 9:
                             ShowAllSalesByCountry();
+                            break;
+                        case 10:
+                            ShowAllCitiesByCountry();
+                            break;
+                        case 11:
+                            ShowAllCategoriesByCustomer();
+                            break;
+                        case 12:
+                            ShowAllPromoByCategory();
                             break;
                         case 0:
                             return;
@@ -277,6 +290,76 @@ namespace Dapper_ORM
             }
             Console.ReadKey();
         }
+
+
+
+        static void ShowAllCitiesByCountry()
+        {
+            Console.Clear();
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                Console.WriteLine("Введите страну:");
+                string country = Console.ReadLine()!;
+
+                var cities = db.Query<CustomerViewModel>(
+                    "SELECT name, date_birth, gender, email, country, city FROM customers WHERE country = @Country",
+                    new { Country = country });
+
+                int iter = 0;
+                foreach (var c in cities)
+                {
+                    Console.WriteLine($"{c.City,10}");
+                }
+            }
+            Console.ReadKey();
+        }
+
+        static void ShowAllCategoriesByCustomer()
+        {
+            //Console.Clear();
+
+            //using (IDbConnection db = new SqlConnection(connectionString))
+            //{
+            //    Console.WriteLine("Введите email покупателя:");
+            //    string customer = Console.ReadLine()!;
+
+            //    var categories = db.Query<CategoryViewModel>(
+            //        "SELECT name FROM categories ",
+            //        new { Email = customer });
+
+            //    int iter = 0;
+            //    foreach (var c in categories)
+            //    {
+            //        Console.WriteLine($"{c.Name,10}");
+            //    }
+            //}
+            //Console.ReadKey();
+        }
+
+        static void ShowAllPromoByCategory()
+        {
+            //Console.Clear();
+
+            //using (IDbConnection db = new SqlConnection(connectionString))
+            //{
+            //    Console.WriteLine("Введите email покупателя:");
+            //    string customer = Console.ReadLine()!;
+
+            //    var categories = db.Query<CategoryViewModel>(
+            //        "SELECT name FROM categories ",
+            //        new { Email = customer });
+
+            //    int iter = 0;
+            //    foreach (var c in categories)
+            //    {
+            //        Console.WriteLine($"{c.Name,10}");
+            //    }
+            //}
+            //Console.ReadKey();
+        }
+
+
 
     }
 }
